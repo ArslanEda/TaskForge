@@ -1,0 +1,50 @@
+<Window xmlns="https://github.com/avaloniaui"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:vm="using:TaskForge.UI.ViewModels"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="400"
+		x:Class="TaskForge.UI.Views.MainWindow"
+		x:DataType="vm:MainWindowViewModel"
+		Icon="/Assets/avalonia-logo.ico"
+		Title="TaskForge.UI"
+        WindowState="Maximized">
+
+	<Design.DataContext>
+		<vm:MainWindowViewModel/>
+	</Design.DataContext>
+
+	<SplitView IsPaneOpen="{Binding IsPaneOpen}"
+			   OpenPaneLength="150"
+			   CompactPaneLength="48"
+			   DisplayMode="CompactInline"
+			   Background="#1e1e1e"
+			   PaneBackground="#1e1e1e">
+
+		<SplitView.Pane>
+			<StackPanel Spacing="5" Margin="5">
+				<Button Command="{Binding TriggerPaneCommand}">
+					<PathIcon Data="{StaticResource LineHorizontal3Regular}"></PathIcon>
+				</Button>
+				<ListBox ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedListItem}">
+					<ListBox.ItemTemplate>
+						<DataTemplate DataType="{x:Type vm:ListItemTemplate}">
+							<StackPanel Spacing="15" Orientation="Horizontal">
+								<PathIcon Data="{Binding ListItemIcon}"></PathIcon>
+								<TextBlock Text="{Binding Label}"></TextBlock>
+							</StackPanel>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+			</StackPanel>
+		</SplitView.Pane>
+
+		<SplitView.Content>
+			<Border Background="#2d2d2d"
+					CornerRadius="12 0 0 0">
+				<TransitioningContentControl Content="{Binding CurrentPage}"></TransitioningContentControl>
+			</Border>
+		</SplitView.Content>
+
+	</SplitView>
+</Window>

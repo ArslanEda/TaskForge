@@ -1,0 +1,158 @@
+[
+  {
+    "Before": null,
+    "After": {
+      "Id": 7,
+      "Type": "refactor",
+      "Title": "clean",
+      "Priority": "medium",
+      "IsCompleted": false,
+      "CreatedAt": "25-12-2025 14:32"
+    }
+  },
+  {
+    "Before": {
+      "Id": 1,
+      "Type": "bug",
+      "Title": "login",
+      "Priority": "low",
+      "IsCompleted": false,
+      "CreatedAt": "18-12-2025 13:30"
+    },
+    "After": {
+      "Id": 1,
+      "Type": "bug",
+      "Title": "login",
+      "Priority": "high",
+      "IsCompleted": false,
+      "CreatedAt": "18-12-2025 13:30"
+    }
+  },
+  {
+    "Before": {
+      "Id": 2,
+      "Type": "bug",
+      "Title": "login",
+      "Priority": "high",
+      "IsCompleted": true,
+      "CreatedAt": "18-12-2025 13:30"
+    },
+    "After": {
+      "Id": 2,
+      "Type": "bug",
+      "Title": "login",
+      "Priority": "low",
+      "IsCompleted": true,
+      "CreatedAt": "18-12-2025 13:30"
+    }
+  },
+  {
+    "Before": {
+      "Id": 1,
+      "Type": "bug",
+      "Title": "login",
+      "Priority": "high",
+      "IsCompleted": false,
+      "CreatedAt": "18-12-2025 13:30"
+    },
+    "After": {
+      "Id": 1,
+      "Type": "bug",
+      "Title": "login",
+      "Priority": "low",
+      "IsCompleted": false,
+      "CreatedAt": "18-12-2025 13:30"
+    }
+  },
+  {
+    "Before": null,
+    "After": {
+      "Id": 5,
+      "Type": "bug",
+      "Title": "crud",
+      "Priority": "low",
+      "IsCompleted": false,
+      "CreatedAt": "25-12-2025 14:19"
+    }
+  },
+  {
+    "Before": {
+      "Id": 2,
+      "Type": "bug",
+      "Title": "delete",
+      "Priority": "high",
+      "IsCompleted": false,
+      "CreatedAt": "18-12-2025 13:30"
+    },
+    "After": {
+      "Id": 2,
+      "Type": "bug",
+      "Title": "login",
+      "Priority": "high",
+      "IsCompleted": true,
+      "CreatedAt": "18-12-2025 13:30"
+    }
+  },
+  {
+    "Before": null,
+    "After": {
+      "Id": 4,
+      "Type": "feature",
+      "Title": "generate",
+      "Priority": "low",
+      "IsCompleted": false,
+      "CreatedAt": "18-12-2025 13:32"
+    }
+  },
+  {
+    "Before": null,
+    "After": {
+      "Id": 2,
+      "Type": "bug",
+      "Title": "delete",
+      "Priority": "high",
+      "IsCompleted": false,
+      "CreatedAt": "18-12-2025 13:30"
+    }
+  },
+  {
+    "Before": null,
+    "After": {
+      "Id": 1,
+      "Type": "bug",
+      "Title": "login",
+      "Priority": "high",
+      "IsCompleted": false,
+      "CreatedAt": "18-12-2025 13:30"
+    }
+  },
+  {
+    "Before": null,
+    "After": {
+      "Id": 3,
+      "Type": "refactor",
+      "Title": "clean",
+      "Priority": "low",
+      "IsCompleted": false,
+      "CreatedAt": "18-12-2025 13:31"
+    }
+  },
+  {
+    "Before": {
+      "Id": 5,
+      "Type": "bug",
+      "Title": "crud",
+      "Priority": "low",
+      "IsCompleted": false,
+      "CreatedAt": "25-12-2025 14:19"
+    },
+    "After": {
+      "Id": 5,
+      "Type": "bug",
+      "Title": "update",
+      "Priority": "low",
+      "IsCompleted": false,
+      "CreatedAt": "25-12-2025 14:19"
+    }
+  }
+]

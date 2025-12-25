@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "TaskForge.App": {
+      "commandName": "Project",
+      "commandLineArgs": "add --type bug --title \"Login Error\" --priority High --severity Critical --steps \"Click login button\"\r\n"
+    },
+    "Profile 1": {
+      "commandName": "Project"
+    }
+  }
+}

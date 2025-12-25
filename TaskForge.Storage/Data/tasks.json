@@ -1,0 +1,50 @@
+[
+  {
+    "Id": 1,
+    "Type": "bug",
+    "Title": "login",
+    "Priority": "high",
+    "IsCompleted": false,
+    "CreatedAt": "18-12-2025 13:30"
+  },
+  {
+    "Id": 2,
+    "Type": "bug",
+    "Title": "login",
+    "Priority": "low",
+    "IsCompleted": true,
+    "CreatedAt": "18-12-2025 13:30"
+  },
+  {
+    "Id": 4,
+    "Type": "feature",
+    "Title": "generate",
+    "Priority": "low",
+    "IsCompleted": false,
+    "CreatedAt": "18-12-2025 13:32"
+  },
+  {
+    "Id": 5,
+    "Type": "bug",
+    "Title": "update",
+    "Priority": "low",
+    "IsCompleted": false,
+    "CreatedAt": "25-12-2025 14:19"
+  },
+  {
+    "Id": 6,
+    "Type": "refactor",
+    "Title": "clean",
+    "Priority": "low",
+    "IsCompleted": false,
+    "CreatedAt": "18-12-2025 13:31"
+  },
+  {
+    "Id": 7,
+    "Type": "refactor",
+    "Title": "clean",
+    "Priority": "medium",
+    "IsCompleted": false,
+    "CreatedAt": "25-12-2025 14:32"
+  }
+]

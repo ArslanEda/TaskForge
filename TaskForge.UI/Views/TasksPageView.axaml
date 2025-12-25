@@ -1,0 +1,477 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:vm="using:TaskForge.UI.ViewModels"
+			 x:Class="TaskForge.UI.Views.TasksPageView"
+			 xmlns:models="using:TaskForge.UI.Models"
+			 x:DataType="vm:TasksPageViewModel">
+
+	<Grid RowDefinitions="Auto,*,Auto" Margin="20">
+
+		<TextBox Grid.Row="0"
+				 Height="40"
+				 Watermark="Search tasks..."
+				 Foreground="White"
+				 Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
+
+		<Border Grid.Row="1"
+				Background="#202020"
+				CornerRadius="12"
+				Padding="15"
+				Margin="0 10 0 10" MinHeight="300">
+
+			<StackPanel>
+
+				<ComboBox ItemsSource="{Binding SortOptions}"
+						  SelectedItem="{Binding SelectedSort}"
+						  MinWidth="1315"
+						  Height="40"/>
+
+
+				<Border Background="#1A1A1A"
+						Padding="10"
+						CornerRadius="6" Height="40" Margin="0 12 0 6">
+
+					<Grid ColumnDefinitions="1*,1*,1*,1*,1*,1*">
+						<TextBlock Grid.Column="0" Text="Type" Foreground="White" HorizontalAlignment="Center" FontSize="17"/>
+						<TextBlock Grid.Column="1" Text="Title" Foreground="White" HorizontalAlignment="Center" FontSize="17"/>
+						<TextBlock Grid.Column="2" Text="Priority" Foreground="White" HorizontalAlignment="Center" FontSize="17"/>
+						<TextBlock Grid.Column="3" Text="Completed" Foreground="White" HorizontalAlignment="Center" FontSize="17"/>
+						<TextBlock Grid.Column="4" Text="Created" Foreground="White" HorizontalAlignment="Center" FontSize="17"/>
+						<TextBlock Grid.Column="5" Text="Actions" Foreground="White" HorizontalAlignment="Center" FontSize="17"/>
+					</Grid>
+
+				</Border>
+
+
+				<Border Background="#1A1A1A"
+						CornerRadius="8"
+						Padding="5"
+						MaxHeight="270">
+
+					<ScrollViewer VerticalScrollBarVisibility="Auto" Height="260">
+
+						<ItemsControl ItemsSource="{Binding FilteredItems}">
+							<ItemsControl.ItemTemplate>
+								<DataTemplate x:DataType="models:TaskModel">
+
+									<Border Background="#252525"
+											CornerRadius="6"
+											Padding="4"
+											Margin="0 4">
+
+										<Grid ColumnDefinitions="1*,1*,1*,1*,1*,1*"
+											  Height="35"
+											  VerticalAlignment="Center">
+
+											<TextBlock Grid.Column="0"
+													   Text="{Binding Type}"
+													   IsVisible="{Binding !IsEditMode}"
+													   Foreground="#DDDDDD"
+													   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+											<TextBox Grid.Column="0"
+													 Text="{Binding Type}"
+													 IsVisible="{Binding IsEditMode}"
+													 Height="28" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+											<TextBlock Grid.Column="1"
+													   Text="{Binding Title}"
+													   IsVisible="{Binding !IsEditMode}"
+													   Foreground="#DDDDDD"
+													   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+											<TextBox Grid.Column="1"
+													 Text="{Binding Title}"
+													 IsVisible="{Binding IsEditMode}"
+													 Height="28" VerticalAlignment="Center"
+													 HorizontalAlignment="Center"/>
+
+											<TextBlock Grid.Column="2"
+													   Text="{Binding Priority}"
+													   IsVisible="{Binding !IsEditMode}"
+													   Foreground="#DDDDDD"
+													   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+											<ComboBox Grid.Column="2"
+													  ItemsSource="{Binding $parent[UserControl].DataContext.Priorities}"
+													  SelectedItem="{Binding Priority}"
+													  IsVisible="{Binding IsEditMode}"
+													  Height="28" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+											<CheckBox Grid.Column="3"
+													  IsChecked="{Binding IsCompleted}"
+													  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+											<TextBlock Grid.Column="4"
+													   Text="{Binding CreatedAt}"
+													   Foreground="#BBBBBB"
+													   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+											<StackPanel Grid.Column="5"
+														Orientation="Horizontal"
+														Spacing="6"
+														HorizontalAlignment="Center" VerticalAlignment="Center">
+
+												<Button Width="30" Height="30"
+														IsVisible="{Binding !IsEditMode}"
+														Command="{Binding $parent[UserControl].DataContext.EditCommand}"
+														CommandParameter="{Binding}" Background="Transparent" BorderBrush="Gray">
+													<PathIcon Data="{StaticResource EditRegular}"
+															  Width="15" Height="15"
+															  Foreground="White" />
+												</Button>
+
+												<Button Width="30" Height="30"
+														IsVisible="{Binding IsEditMode}"
+														Command="{Binding $parent[UserControl].DataContext.SaveCommand}"
+														CommandParameter="{Binding}" Background="Transparent" BorderBrush="Gray">
+													<PathIcon Data="{StaticResource SaveRegular}"
+															  Width="15" Height="15"
+															  Foreground="White"/>
+												</Button>
+
+												<Button Width="30" Height="30"
+														IsVisible="{Binding IsEditMode}"
+														Command="{Binding $parent[UserControl].DataContext.CancelCommand}"
+														CommandParameter="{Binding}" Background="Transparent" BorderBrush="Gray">
+													<PathIcon Data="{StaticResource DismissRegular}"
+															  Width="15" Height="15"
+															  Foreground="White"/>
+												</Button>
+
+												<Button Width="30" Height="30"
+														IsVisible="{Binding !IsEditMode}"
+														Command="{Binding $parent[UserControl].DataContext.DeleteTaskCommand}"
+														CommandParameter="{Binding}" Background="Transparent" BorderBrush="Gray">
+													<PathIcon Data="{StaticResource DeleteRegular}"
+															  Width="15" Height="15"
+															  Foreground="White"/>
+												</Button>
+
+											</StackPanel>
+
+										</Grid>
+
+									</Border>
+								</DataTemplate>
+							</ItemsControl.ItemTemplate>
+						</ItemsControl>
+
+					</ScrollViewer>
+
+				</Border>
+			</StackPanel>
+		</Border>
+
+		<Grid Grid.Row="2"
+			  ColumnDefinitions="1*,1*,1*"
+			  ColumnSpacing="10"
+			  Margin="0 5 0 0" MinHeight="300">
+
+			<Border Grid.Column="0"
+					Background="#202020"
+					CornerRadius="12"
+					Padding="15" >
+
+				<StackPanel Spacing="12">
+
+					<TextBox Text="{Binding Type}" Watermark="Type" Height="43" MinWidth="280" FontSize="15" VerticalContentAlignment="Center"/>
+					<TextBox Text="{Binding Title}" Watermark="Title" Height="43" MinWidth="280" FontSize="15" VerticalContentAlignment="Center"/>
+
+
+					<ComboBox ItemsSource="{Binding Priorities}"
+							  SelectedItem="{Binding SelectedPriority}"
+							  Height="43" MinWidth="410"/>
+
+					<TextBox Watermark="For design purposes only." IsReadOnly="False" Height="43" MinWidth="280" FontSize="15" VerticalContentAlignment="Center"/>
+
+					<StackPanel Orientation="Horizontal" Spacing="10">
+
+						<Button Width="80"
+								Height="45"
+								Command="{Binding AddTaskCommand}"
+								Background="#2A2A2A"
+								BorderThickness="0"
+								CornerRadius="4">
+
+							<StackPanel Orientation="Horizontal"
+										Spacing="8"
+										HorizontalAlignment="Center"
+										VerticalAlignment="Center">
+
+								<PathIcon Data="{StaticResource TaskListAddRegular}"
+										  Width="20"
+										  Height="20"
+										  Foreground="White"/>
+
+								<TextBlock Text="Add"
+										   Foreground="White"
+										   FontSize="16"
+										   VerticalAlignment="Center"/>
+							</StackPanel>
+
+						</Button>
+
+						<Border Background="#3A0000" Width="322" Height="45"
+								CornerRadius="6"
+								Padding="8 4"
+								IsVisible="{Binding AddErrorMessage}">
+							<TextBlock Text="{Binding AddErrorMessage}" Foreground="White" VerticalAlignment="Center"/>
+						</Border>
+
+					</StackPanel>
+
+				</StackPanel>
+
+			</Border>
+
+
+			<Border Grid.Column="1"
+					Background="#202020"
+					CornerRadius="12"
+					Padding="15">
+
+				<StackPanel Spacing="12">
+
+					<StackPanel Orientation="Horizontal"
+								Spacing="10"
+								VerticalAlignment="Center">
+
+						<ComboBox ItemsSource="{Binding Formats}"
+								  SelectedItem="{Binding SelectedFormat}"
+								  Width="200"
+								  Height="42"/>
+
+						<Button Height="42" Width="200"
+								Padding="10 0"
+								Command="{Binding GenerateReportCommand}"
+								BorderThickness="0"
+								CornerRadius="4">
+
+							<StackPanel Orientation="Horizontal" Spacing="5" HorizontalAlignment="Center">
+
+								<PathIcon Data="{StaticResource DocumentAddRegular}"
+										  Width="18"
+										  Height="18"
+										  Foreground="White"/>
+
+								<TextBlock Text="Create Report"
+										   Foreground="White"
+										   VerticalAlignment="Center"
+										   FontSize="15"/>
+
+							</StackPanel>
+
+						</Button>
+
+					</StackPanel>
+
+					<Border Background="#1A1A1A"
+							CornerRadius="8"
+							Padding="6"
+							MaxHeight="215">
+
+						<ScrollViewer VerticalScrollBarVisibility="Auto" Height="200">
+
+							<ItemsControl ItemsSource="{Binding ReportFiles}">
+								<ItemsControl.ItemTemplate>
+									<DataTemplate x:DataType="x:String">
+
+										<Border Background="#252525"
+												CornerRadius="6"
+												Padding="6 4"
+												Margin="2 4">
+
+											<Grid ColumnDefinitions="28,*,Auto"
+												  Height="35"
+												  VerticalAlignment="Center">
+
+												<PathIcon Data="{StaticResource DocumentRegular}"
+														  Width="18" Height="18"
+														  Foreground="#CCCCCC"
+														  VerticalAlignment="Center"/>
+
+												<TextBlock Grid.Column="1"
+														   Text="{Binding}"
+														   Foreground="#DDDDDD"
+														   FontSize="15"
+														   VerticalAlignment="Center"
+														   Margin="8 0 0 0"/>
+
+												<Button Grid.Column="2"
+														Width="30" Height="30"
+														Background="Transparent"
+														BorderBrush="Gray"
+														BorderThickness="1"
+														CornerRadius="5"
+														Command="{Binding $parent[UserControl].DataContext.OpenReportCommand}"
+														CommandParameter="{Binding}">
+
+													<PathIcon Data="{StaticResource OpenRegular}"
+															  Width="15" Height="15"
+															  Foreground="White"
+															  VerticalAlignment="Center" ToolTip.Tip="OpenReport"/>
+												</Button>
+
+											</Grid>
+
+										</Border>
+
+									</DataTemplate>
+								</ItemsControl.ItemTemplate>
+							</ItemsControl>
+
+						</ScrollViewer>
+
+					</Border>
+
+
+				</StackPanel>
+
+			</Border>
+
+
+			<Border Grid.Column="2"
+					Background="#202020"
+					CornerRadius="12"
+					Padding="20">
+
+				<StackPanel Spacing="17">
+
+					<DockPanel LastChildFill="False">
+
+						<StackPanel Orientation="Horizontal"
+									Spacing="8"
+									VerticalAlignment="Center">
+
+							<PathIcon Data="{StaticResource HistoryRegular}"
+									  Width="23"
+									  Height="23"
+									  Foreground="White"
+									  VerticalAlignment="Center"/>
+
+							<TextBlock Text="History"
+									   FontSize="19"
+									   Foreground="White"
+									   VerticalAlignment="Center"/>
+						</StackPanel>
+
+						<StackPanel Orientation="Horizontal"
+									Spacing="10"
+									DockPanel.Dock="Right"
+									VerticalAlignment="Center">
+
+							<Button Width="32" Height="32"
+									Background="Transparent"
+									BorderBrush="Gray"
+									Command="{Binding UndoCommand}"
+									ToolTip.Tip="Undo">
+								<PathIcon Data="{StaticResource ArrowUndoRegular}"
+										  Width="15" Height="15"
+										  Foreground="White"/>
+							</Button>
+
+							<Button Width="32" Height="32"
+									Background="Transparent"
+									BorderBrush="Gray"
+									Command="{Binding RedoCommand}"
+									ToolTip.Tip="Redo">
+								<PathIcon Data="{StaticResource ArrowRedoRegular}"
+										  Width="15" Height="15"
+										  Foreground="White"/>
+							</Button>
+
+						</StackPanel>
+
+					</DockPanel>
+
+					<Border Background="#1A1A1A"
+							CornerRadius="8"
+							Padding="6"
+							MaxHeight="220">
+
+						<ScrollViewer VerticalScrollBarVisibility="Auto"
+									  Height="200">
+
+							<ItemsControl ItemsSource="{Binding UndoHistory}">
+								<ItemsControl.ItemTemplate>
+									<DataTemplate x:DataType="x:String">
+
+										<Border Background="#252525"
+												CornerRadius="6"
+												Padding="10"
+												Margin="2 4" Height="43">
+
+											<StackPanel Orientation="Horizontal"
+														VerticalAlignment="Center"
+														Spacing="8">
+
+												<PathIcon Data="{StaticResource HistoryRegular}"
+														  Width="17"
+														  Height="17"
+														  Foreground="White"
+														  VerticalAlignment="Center"/>
+
+												<TextBlock Text="{Binding}"
+														   Foreground="#DDDDDD"
+														   FontSize="15"
+														   VerticalAlignment="Center"
+														   TextWrapping="NoWrap"/>
+											</StackPanel>
+
+										</Border>
+
+									</DataTemplate>
+								</ItemsControl.ItemTemplate>
+							</ItemsControl>
+
+
+						</ScrollViewer>
+
+					</Border>
+
+				</StackPanel>
+
+			</Border>
+
+
+		</Grid>
+		<Popup IsOpen="{Binding PopupOpen}"
+			   Placement="Center">
+
+			<Border Background="#2A0E0E"
+					BorderBrush="#8B2C2C"
+					BorderThickness="1"
+					CornerRadius="10"
+					Padding="16"
+					Width="320">
+
+				<StackPanel Spacing="12">
+
+					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="8">
+						<PathIcon Data="{StaticResource WarningRegular}"
+								  Width="20"
+								  Height="20"
+								  Foreground="#FF6B6B"/>
+
+						<TextBlock Text="Warning"
+								   Foreground="White"
+								   FontSize="16"
+								   FontWeight="SemiBold" VerticalAlignment="Center"/>
+					</StackPanel>
+
+					<TextBlock Text="{Binding PopupMessage}"
+							   Foreground="#FFBABA"
+							   FontSize="14"
+							   TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+					<Button Content="OK"
+							HorizontalAlignment="Center"
+							Command="{Binding ClosePopupCommand}" Height="27" Width="38"/>
+				</StackPanel>
+			</Border>
+		</Popup>
+
+	</Grid>
+
+</UserControl>
